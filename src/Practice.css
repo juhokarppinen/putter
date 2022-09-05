@@ -1,0 +1,11 @@
+.PracticeContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.ScoreGrid {
+  width: auto;
+  display: grid;
+  grid-gap: 8px;
+}
