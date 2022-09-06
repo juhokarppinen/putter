@@ -2,4 +2,4 @@
 
 # Putter
 
-A simple web app for tracking disc golf putting practice.
+A simple web app for tracking disc golf putting practice. The application is available at https://putter.netlify.app
