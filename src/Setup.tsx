@@ -42,7 +42,7 @@ export default function Setup({ options, setOptions, setState }: Props) {
       {getSelect(
         "Minimum distance",
         "minimumDistance",
-        range(2, options.maximumDistance + 1),
+        range(2, options.maximumDistance),
         "meters",
         (minimumDistance: number) => (
           setOptions((s) => ({
@@ -55,7 +55,7 @@ export default function Setup({ options, setOptions, setState }: Props) {
       {getSelect(
         "Maximum distance",
         "maximumDistance",
-        range(options.minimumDistance, 11),
+        range(options.minimumDistance, 10),
         "meters",
         (maximumDistance: number) => (
           setOptions((s) => ({
@@ -68,12 +68,12 @@ export default function Setup({ options, setOptions, setState }: Props) {
       {getSelect(
         "Starting distance",
         "startDistance",
-        range(options.minimumDistance, options.maximumDistance + 1),
+        range(options.minimumDistance, options.maximumDistance, 0.5),
         "meters"
       )}
-      {getSelect("Rounds", "rounds", range(5, 21))}
-      {getSelect("Throws per round", "throwsPerRound", range(1, 6))}
-      {getSelect("Distance change", "change", [0, 0.5, 1], "meters")}
+      {getSelect("Rounds", "rounds", range(5, 20))}
+      {getSelect("Throws per round", "throwsPerRound", range(1, 5))}
+      {getSelect("Distance change", "change", range(0, 1, 0.5), "meters")}
       <button onClick={() => setState("practice")}>Practice</button>
     </section>
   );
