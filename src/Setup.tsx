@@ -12,13 +12,17 @@ export default function Setup({ options, setOptions, setState }: Props) {
     label: string,
     option: keyof Options,
     values: number[],
-    postLabel?: string
+    postLabel?: string,
+    process: (...args: any[]) => number = (n) => n
   ) => (
     <label>
       {label}:
       <select
         onChange={(e) =>
-          setOptions((s) => ({ ...s, [option]: Number(e.target.value) }))
+          setOptions((s) => ({
+            ...s,
+            [option]: process(Number(e.target.value)),
+          }))
         }
         value={options[option]}
       >
@@ -35,7 +39,38 @@ export default function Setup({ options, setOptions, setState }: Props) {
   return (
     <section>
       <h2>Setup</h2>
-      {getSelect("Starting distance", "startDistance", range(4, 11), "meters")}
+      {getSelect(
+        "Minimum distance",
+        "minimumDistance",
+        range(2, options.maximumDistance + 1),
+        "meters",
+        (minimumDistance: number) => (
+          setOptions((s) => ({
+            ...s,
+            startDistance: Math.max(s.startDistance, minimumDistance),
+          })),
+          minimumDistance
+        )
+      )}
+      {getSelect(
+        "Maximum distance",
+        "maximumDistance",
+        range(options.minimumDistance, 11),
+        "meters",
+        (maximumDistance: number) => (
+          setOptions((s) => ({
+            ...s,
+            startDistance: Math.min(s.startDistance, maximumDistance),
+          })),
+          maximumDistance
+        )
+      )}
+      {getSelect(
+        "Starting distance",
+        "startDistance",
+        range(options.minimumDistance, options.maximumDistance + 1),
+        "meters"
+      )}
       {getSelect("Rounds", "rounds", range(5, 21))}
       {getSelect("Throws per round", "throwsPerRound", range(1, 6))}
       {getSelect("Distance change", "change", [0, 0.5, 1], "meters")}

@@ -36,9 +36,15 @@ export default function Practice({
     const minimumTarget = Math.ceil(options.throwsPerRound / 2);
     const distance =
       score < minimumTarget
-        ? Math.max(currentResult.distance - options.change, 2)
+        ? Math.max(
+            currentResult.distance - options.change,
+            options.minimumDistance
+          )
         : score > minimumTarget || options.throwsPerRound === score
-        ? currentResult.distance + options.change
+        ? Math.min(
+            currentResult.distance + options.change,
+            options.maximumDistance
+          )
         : currentResult.distance;
 
     if (currentRound >= options.rounds) {

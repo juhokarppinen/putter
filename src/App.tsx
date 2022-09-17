@@ -9,7 +9,9 @@ function App() {
   const [results, setResults] = useState<Result[]>([]);
   const [options, setOptions] = useState<Options>({
     startDistance: 4,
-    throwsPerRound: 3,
+    minimumDistance: 4,
+    maximumDistance: 10,
+    throwsPerRound: 5,
     change: 0.5,
     rounds: 10,
   });

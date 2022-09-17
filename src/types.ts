@@ -12,6 +12,8 @@ export type Result = {
 
 export type Options = {
   startDistance: number;
+  minimumDistance: number;
+  maximumDistance: number;
   throwsPerRound: number;
   change: number;
   rounds: number;
